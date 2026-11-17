@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +5,7 @@
     <style>
         body {
             margin: 0;
-            background: #000000;
+            background: #a9e8f5;
             font-family: Arial;
         }
 
@@ -28,7 +27,6 @@
             justify-content: center;
             flex-direction: column;
             cursor: pointer;
-            overflow: hidden;
         }
 
         .channel:hover {
@@ -45,30 +43,86 @@
             margin-top: 5px;
             font-weight: bold;
         }
+
+        /* FULL SCREEN CHANNEL */
+
+        .channel-screen {
+            display: none;
+            height: 100vh;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #a9e8f5;
+        }
+
+        .preview {
+            width: 85%;
+            height: 70vh;
+            object-fit: contain;
+            background: white;
+            border: 4px solid white;
+            border-radius: 8px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            width: 150px;
+            padding: 15px;
+            font-size: 18px;
+            background: white;
+            border: 2px solid #aaa;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .buttons button:hover {
+            border-color: #5cc8ee;
+        }
     </style>
 </head>
 <body>
 
+<!-- GRID MENU -->
 <div class="menu" id="menu"></div>
 
+<!-- CHANNEL SCREEN -->
+<div class="channel-screen" id="channelScreen">
+    <img class="preview" id="preview">
+
+    <div class="buttons">
+        <button onclick="returnToMenu()">Return</button>
+        <button onclick="customize()">Customize</button>
+        <button onclick="enterChannel()">Enter</button>
+    </div>
+</div>
+
 <script>
-// Change your channels here
+
+// CHANGE YOUR CHANNELS HERE
 const channels = [
-    { name: "Internet Channel", image: "images/internet.png", url: "https://google.com" },
-    { name: "Game Channel", image: "images/game.png", url: "https://example.com" },
-    { name: "Music Channel", image: "images/music.png", url: "https://youtube.com" },
-    { name: "Video Channel", image: "images/video.png", url: "https://example.com" },
+    { name: "Internet Channel", image: "images/internet.png", preview: "images/internet-preview.png", url: "https://google.com" },
+    { name: "Game Channel", image: "images/game.png", preview: "images/game-preview.png", url: "https://example.com" },
+    { name: "Music Channel", image: "images/music.png", preview: "images/music-preview.png", url: "https://youtube.com" },
+    { name: "Video Channel", image: "images/video.png", preview: "images/video-preview.png", url: "https://example.com" },
 
-    { name: "Photos", image: "images/photos.png", url: "https://example.com" },
-    { name: "News Channel", image: "images/news.png", url: "https://example.com" },
-    { name: "Weather", image: "images/weather.png", url: "https://example.com" },
-    { name: "Channel 8", image: "images/channel8.png", url: "https://example.com" },
+    { name: "Photos", image: "images/photos.png", preview: "images/photos-preview.png", url: "https://example.com" },
+    { name: "News Channel", image: "images/news.png", preview: "images/news-preview.png", url: "https://example.com" },
+    { name: "Weather", image: "images/weather.png", preview: "images/weather-preview.png", url: "https://example.com" },
+    { name: "Channel 8", image: "images/channel8.png", preview: "images/channel8-preview.png", url: "https://example.com" },
 
-    { name: "Channel 9", image: "images/channel9.png", url: "https://example.com" },
-    { name: "Channel 10", image: "images/channel10.png", url: "https://example.com" },
-    { name: "Channel 11", image: "images/channel11.png", url: "https://example.com" },
-    { name: "Channel 12", image: "images/channel12.png", url: "https://example.com" }
+    { name: "Channel 9", image: "images/channel9.png", preview: "images/channel9-preview.png", url: "https://example.com" },
+    { name: "Channel 10", image: "images/channel10.png", preview: "images/channel10-preview.png", url: "https://example.com" },
+    { name: "Channel 11", image: "images/channel11.png", preview: "images/channel11-preview.png", url: "https://example.com" },
+    { name: "Channel 12", image: "images/channel12.png", preview: "images/channel12-preview.png", url: "https://example.com" }
 ];
+
+let selectedChannel = null;
 
 const menu = document.getElementById("menu");
 
@@ -77,16 +131,54 @@ channels.forEach(channel => {
     button.className = "channel";
 
     button.innerHTML = `
-        <img src="${channel.image}" alt="${channel.name}">
+        <img src="${channel.image}">
         <div class="name">${channel.name}</div>
     `;
 
-    button.onclick = () => {
-        window.open(channel.url, "_blank");
-    };
+    button.onclick = () => openChannel(channel);
 
     menu.appendChild(button);
 });
+
+// OPEN CHANNEL
+function openChannel(channel) {
+    selectedChannel = channel;
+
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("channelScreen").style.display = "flex";
+
+    document.getElementById("preview").src = channel.preview;
+}
+
+// RETURN TO GRID
+function returnToMenu() {
+    document.getElementById("channelScreen").style.display = "none";
+    document.getElementById("menu").style.display = "grid";
+}
+
+// CUSTOMIZE IMAGE
+function customize() {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+
+    input.onchange = () => {
+        const file = input.files[0];
+
+        if (file) {
+            selectedChannel.preview = URL.createObjectURL(file);
+            document.getElementById("preview").src = selectedChannel.preview;
+        }
+    };
+
+    input.click();
+}
+
+// ENTER CHANNEL
+function enterChannel() {
+    window.open(selectedChannel.url, "_blank");
+}
+
 </script>
 
 </body>

@@ -1,214 +1,90 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wii Menu</title>
-
+    <title>Wii Menu</title>
     <style>
-    * {
-        box-sizing: border-box;
-    }
-    
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(#a9e8f5, #48b9e6);
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background: #a9e8f5;
+            font-family: Arial;
         }
-        
+
         .menu {
-            width: 90%;
-            max-width: 1100px;
-            height: 76vh;
-            margin-top: 5vh;
-            padding: 25px;
-            background: #d8d8d8;
-            border: 5px solid #f4f4f4;
-            border-radius: 9px;
-            box-shadow: 0 5px 15px #0003;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             grid-template-rows: repeat(3, 1fr);
             gap: 15px;
+            padding: 25px;
+            height: 80vh;
         }
-        
+
         .channel {
             background: white;
             border: 3px solid #aaa;
             border-radius: 7px;
-            box-shadow: inset 0 0 8px #ddd;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             cursor: pointer;
-            transition: 0.15s;
-            overflow: hidden;
-            padding: 8px;
         }
-        
+
         .channel:hover {
             border-color: #5cc8ee;
-            transform: scale(1.035);
-            box-shadow: 0 0 12px #5cc8ee;
         }
-        
-        .channel:active {
-            transform: scale(0.97);
-        }
-        
-        .channel-icon {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
-        
-        .channel input {
-            width: 90%;
-            border: none;
-            background: transparent;
-            text-align: center;
-            font-size: 15px;
-            font-weight: bold;
-            outline: none;
-            color: #555;
-        }
-        
-        .channel input:focus {
-            background: #eafaff;
-            border-radius: 4px;
-        }
-        
-        .bottom {
-            margin-top: auto;
-            width: 100%;
-            height: 12vh;
-            background: linear-gradient(#eeeeee, #c9c9c9);
-            border-top: 4px solid white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 6%;
-        }
-        
-        .circle {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            background: white;
-            border: 4px solid #aaa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 28px;
-            color: #555;
-        }
-        
-        .date {
-            font-size: 23px;
-            color: #555;
-        }
-        
-        @media(max-width: 650px) {
-            .menu {
-                width: 96%;
-                padding: 10px;
-                gap: 7px;
-            }
-        
-            .channel-icon {
-                font-size: 25px;
-            }
-        
-            .channel input {
-                font-size: 11px;
-            }
-        }
-        </style>
-    </head>
-    
-    <body>
-    
-    <div class="menu" id="menu"></div>
-    
-    <div class="bottom">
-        <div class="circle">Settings</div>
-        <div class="date" id="date"></div>
-        <div class="circle">Mail</div>
-    </div>
-    
-    <script>
-    
-    // =====================================
-    // CHANGE YOUR CHANNELS HERE
-    // =====================================
-    
-    const channels = [
-        { name: "Internet Channel", icon: "TR", html: "https://google.com" },
-        { name: "Game Channel", icon: "UR", html: "https://example.com" },
-        { name: "Music Channel", icon: "UR", html: "https://youtube.com" },
-        { name: "Video Channel", icon: "📺", html: "https://example.com" },
-    
-        { name: "Photos", icon: "UR", html: "https://example.com" },
-        { name: "News Channel", icon: "UR", html: "https://example.com" },
-        { name: "Weather", icon: "UR", html: "https://example.com" },
-        { name: "Channel 8", icon: "UR", html: "https://example.com" },
-    
-        { name: "Channel 9", icon: "UR", html: "https://example.com" },
-        { name: "Channel 10", icon: "UR", html: "https://example.com" },
-        { name: "Channel 11", icon: "UR", html: "https://example.com" },
-        { name: "Channel 12", icon: "UR", html: "https://example.com" }
-    ];
-    
-    
-    const menu = document.getElementById("menu");
-    
-    channels.forEach((channel) => {
-    
-        const tile = document.createElement("div");
-        tile.className = "channel";
-    
-        const icon = document.createElement("div");
-        icon.className = "channel-icon";
-        icon.textContent = channel.icon;
-    
-        const name = document.createElement("input");
-        name.value = channel.name;
-        name.title = "Edit channel name";
-        name.addEventListener("click", e => e.stopPropagation());
-    
-        tile.appendChild(icon);
-        tile.appendChild(name);
-    
-        tile.addEventListener("click", () => {
-            if (channel.url) {
-                window.open(channel.url, "_blank");
-            }
-        });
-    
-        menu.appendChild(tile);
-    });
-    
-    
-    function updateDate() {
-        const now = new Date();
-    
-        document.getElementById("date").textContent =
-            now.toLocaleDateString("en-US", {
-                month: "numeric",
-                day: "numeric",
-                year: "numeric"
-            });
-    }
-    
-    updateDate();
-    
-    </script>
-    </body>
-</html>
 
+        .icon {
+            font-size: 40px;
+        }
+
+        .name {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="menu" id="menu"></div>
+
+<script>
+// Change your channels here
+const channels = [
+    { name: "Internet Channel", icon: "🌐", url: "https://google.com" },
+    { name: "Game Channel", icon: "🎮", url: "https://example.com" },
+    { name: "Music Channel", icon: "🎵", url: "https://youtube.com" },
+    { name: "Video Channel", icon: "📺", url: "https://example.com" },
+
+    { name: "Photos", icon: "📷", url: "https://example.com" },
+    { name: "News Channel", icon: "📰", url: "https://example.com" },
+    { name: "Weather", icon: "☀️", url: "https://example.com" },
+    { name: "Channel 8", icon: "❔", url: "https://example.com" },
+
+    { name: "Channel 9", icon: "❔", url: "https://example.com" },
+    { name: "Channel 10", icon: "❔", url: "https://example.com" },
+    { name: "Channel 11", icon: "❔", url: "https://example.com" },
+    { name: "Channel 12", icon: "❔", url: "https://example.com" }
+];
+
+const menu = document.getElementById("menu");
+
+channels.forEach(channel => {
+    const button = document.createElement("div");
+    button.className = "channel";
+
+    button.innerHTML = `
+        <div class="icon">${channel.icon}</div>
+        <div class="name">${channel.name}</div>
+    `;
+
+    button.onclick = () => {
+        window.open(channel.url, "_blank");
+    };
+
+    menu.appendChild(button);
+});
+</script>
+
+</body>
+</html>

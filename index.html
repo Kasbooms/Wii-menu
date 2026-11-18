@@ -19,25 +19,20 @@
             height: 80vh;
         }
 
-         .channel {
+        .channel {
             position: relative;
-        
             background: linear-gradient(
                 to bottom,
                 #ffffff,
                 #f8f8f8 45%,
                 #e5e5e5
             );
-        
             border: 1px solid #bbb;
-        
-            border-radius: 15px 15px 15px 15px / 15px 15px 15px 15px;
-        
+            border-radius: 15px;
             box-shadow:
                 inset 0 2px 3px white,
                 inset 0 -2px 4px rgba(150,150,150,0.2),
                 0 2px 3px rgba(0,0,0,0.15);
-        
             display: flex;
             align-items: center;
             justify-content: center;
@@ -54,11 +49,42 @@
             height: 100%;
             object-fit: fill;
         }
+
+        /* Footer */
+        .footer {
+            height: 65px;
+            margin: 0 25px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 2px solid #ccc;
+            padding-top: 10px;
+        }
+
+        .footer-date {
+            color: #777;
+            font-size: 20px;
+        }
+
+        .footer-message {
+            background: linear-gradient(#fff, #e8e8e8);
+            border: 1px solid #bbb;
+            border-radius: 25px;
+            padding: 12px 35px;
+            color: #777;
+            box-shadow: inset 0 2px 3px white;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
 <div class="menu" id="menu"></div>
+
+<div class="footer">
+    <div class="footer-date" id="date"></div>
+    <div class="footer-message">Wii Menu</div>
+</div>
 
 <script>
 // Change your channels here
@@ -95,6 +121,14 @@ channels.forEach(channel => {
 
     menu.appendChild(button);
 });
+
+// Display current date
+document.getElementById("date").textContent =
+    new Date().toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+    });
 </script>
 
 </body>

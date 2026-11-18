@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,10 +26,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
             cursor: pointer;
             overflow: hidden;
-            position: relative;
         }
 
         .channel:hover {
@@ -40,11 +39,6 @@
             height: 100%;
             object-fit: fill;
         }
-
-        .name {
-            margin-top: 5px;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
@@ -54,20 +48,20 @@
 <script>
 // Change your channels here
 const channels = [
-    { name: "", image: "images/Example.Png", url: "https://google.com" },
-    { name: "", image: "images/Example.Png", url: "https://example.com" },
-    { name: "", image: "images/Example.Png", url: "https://youtube.com" },
-    { name: "", image: "images/Example.Png", url: "https://example.com" },
+    { image: "images/Example.Png", url: "https://google.com" },
+    { image: "images/Example.Png", url: "https://example.com" },
+    { image: "images/Example.Png", url: "https://youtube.com" },
+    { image: "images/Example.Png", url: "https://example.com" },
 
-    { name: "Photos", image: "images/Example.Png", url: "https://example.com" },
-    { name: "News Channel", image: "images/Example.Png", url: "https://example.com" },
-    { name: "Weather", image: "images/Example.Png", url: "https://example.com" },
-    { name: "Channel 8", image: "images/Example.Png", url: "https://example.com" },
+    { image: "images/Example.Png", url: "https://example.com" },
+    { image: "images/Example.Png", url: "https://example.com" },
+    { image: "images/Example.Png", url: "https://example.com" },
+    { image: "images/Example.Png", url: "https://example.com" },
 
-    { name: "Channel 9", image: "images/Example.Png", url: "https://example.com" },
-    { name: "Channel 10", image: "images/Example.Png", url: "https://example.com" },
-    { name: "Channel 11", image: "images/Example.Png", url: "https://example.com" },
-    { name: "Channel 12", image: "images/Example.Png", url: "https://example.com" }
+    { image: "images/Example.Png", url: "https://example.com" },
+    { image: "images/Example.Png", url: "https://example.com" },
+    { image: "images/Example.Png", url: "https://example.com" },
+    { image: "images/Example.Png", url: "https://example.com" }
 ];
 
 const menu = document.getElementById("menu");
@@ -77,8 +71,7 @@ channels.forEach(channel => {
     button.className = "channel";
 
     button.innerHTML = `
-        <img src="${channel.image}"
-        <div class="name">${channel.name}</div>
+        <img src="${channel.image}">
     `;
 
     button.onclick = () => {

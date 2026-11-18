@@ -96,10 +96,8 @@
 
 <body>
 
-    <!-- Wii Channels -->
     <div class="menu" id="menu"></div>
 
-    <!-- Wii Footer -->
     <div class="footer">
 
         <div class="footer-date" id="date"></div>
@@ -112,7 +110,6 @@
 
     <script>
 
-        // Change your channels here
         const channels = [
             { image: "images/Example.Png", url: "https://google.com" },
             { image: "images/Example.Png", url: "https://example.com" },
@@ -132,7 +129,6 @@
 
         const menu = document.getElementById("menu");
 
-        // Generate channels
         channels.forEach(channel => {
 
             const button = document.createElement("div");
@@ -150,7 +146,6 @@
 
         });
 
-        // Automatically display today's date
         document.getElementById("date").textContent =
             new Date().toLocaleDateString("en-US", {
                 month: "long",
